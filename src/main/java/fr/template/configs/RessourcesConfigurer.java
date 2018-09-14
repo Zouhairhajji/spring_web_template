@@ -29,8 +29,6 @@ class RessourcesConfigurer extends WebMvcConfigurerAdapter {
                 .addResourceLocations("classpath:/META-INF/resources/webjars/")
                 .setCacheControl(CacheControl.maxAge(365, TimeUnit.DAYS));
 
-        
-        
         registry.addResourceHandler("/resources/**")
                 .addResourceLocations("file://" + pathResources)
                 .setCacheControl(CacheControl.maxAge(365, TimeUnit.DAYS));

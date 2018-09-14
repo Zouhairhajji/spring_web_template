@@ -26,9 +26,9 @@
         <!-- search form -->
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <input type="text" id="_input_search_li" onkeyup="native_filter_li($(this))" class="form-control" placeholder="Search...">
                 <span class="input-group-btn">
-                    <button type="button" name="search"  class="btn btn-flat"><i class="fa fa-search"></i></button>
+                    <button type="button" name="search" onclick="native_filter_li($(this))" class="btn btn-flat"><i class="fa fa-search"></i></button>
                 </span>
             </div>
         </form>
@@ -65,3 +65,6 @@
         </ul>
     </section>
 </aside>
+                
+                
+           

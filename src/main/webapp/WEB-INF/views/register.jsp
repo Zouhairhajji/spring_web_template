@@ -20,6 +20,7 @@
         <title>Page d'authentification</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
+        <link rel="shortcut icon" href="/app_logo.png" type="image/x-icon" />
         <!-- Bootstrap 3.3.7 -->
         <link rel="stylesheet" href="<c:url value="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" />">
         <!-- Font Awesome -->

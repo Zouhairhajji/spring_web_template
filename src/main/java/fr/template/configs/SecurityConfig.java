@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class HHDSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserService userService;
@@ -27,17 +27,15 @@ public class HHDSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 
-    /**
-     *
-     * @param http
-     * @throws Exception
-     */
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/ajax/auth/nbr_steps**").permitAll()
                 .antMatchers("/register**").permitAll()
                 .antMatchers("/login**").permitAll()
+                .antMatchers("/users/**").authenticated()
+                .antMatchers("/roles/**").authenticated()
                 .antMatchers("/**").authenticated()
                 // STATICS STUFFS
                 .and().formLogin().loginPage("/login")

@@ -56,6 +56,7 @@ public class UserService implements UserDetailsService {
         }
     }
 
+    @Transactional
     public void registerUser(User user) throws Exception {
         String genPw = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(10));
         Function<String, String> identiconGenerator = x -> {
@@ -91,4 +92,68 @@ public class UserService implements UserDetailsService {
         this.userRepository.save(user);
     }
 
+    @Transactional
+    public List<Role> getAllRoles() {
+        return this.roleRepository.findAll();
+    }
+
+    @Transactional
+    public Role findRole(Integer idRole) {
+        return this.roleRepository.findOne(idRole);
+    }
+
+    @Transactional
+    public List<User> getAllUsers() {
+        return this.userRepository.findAll();
+    }
+
+    @Transactional
+    public Role updateRole(Role role) {
+        return this.roleRepository.save(role);
+    }
+
+    @Transactional
+    public Role saveRole(Role formRole) {
+        formRole.setDateCreation(new Timestamp(System.currentTimeMillis()));
+        return this.roleRepository.save(formRole);
+    }
+
+    @Transactional
+    public void deleteRole(Integer idRole) {
+        this.roleRepository.delete(idRole);
+    }
+    
+    @Transactional
+    public User findUserById(Long idUser) {
+        return this.userRepository.findOne(idUser);
+    }
+
+    @Transactional
+    public void updateUser(User userForm) {
+        this.userRepository.save(userForm);
+    }
+
+    
+    @org.springframework.transaction.annotation.Transactional
+    public void lockUser(Long idUser) {
+        this.userRepository.setLockFor(idUser);
+    }
+
+    /**
+     *
+     * @param idUser
+     */
+    @org.springframework.transaction.annotation.Transactional
+    public User unlockUser(Long idUser) {
+        this.userRepository.setUnlockFor(idUser);
+        User user = this.userRepository.findOne(idUser);
+        return user;
+    }
+
+    
+    @Transactional
+    public void deleteUser(Long idUser) {
+        User user = this.userRepository.findOne(idUser);
+        this.userRepository.delete(user);
+    }
 }
