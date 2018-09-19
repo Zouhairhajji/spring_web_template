@@ -41,9 +41,6 @@ public class UserService implements UserDetailsService {
     @Autowired
     private RoleRepository roleRepository;
 
-    public User findUserByUsername(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     @Transactional
@@ -106,7 +103,17 @@ public class UserService implements UserDetailsService {
     public List<User> getAllUsers() {
         return this.userRepository.findAll();
     }
+    
+    @Transactional
+    public long countUsers() {
+        return this.userRepository.count();
+    }
 
+    @Transactional
+    public long countRoles() {
+        return this.roleRepository.count();
+    }
+    
     @Transactional
     public Role updateRole(Role role) {
         return this.roleRepository.save(role);
@@ -122,7 +129,7 @@ public class UserService implements UserDetailsService {
     public void deleteRole(Integer idRole) {
         this.roleRepository.delete(idRole);
     }
-    
+
     @Transactional
     public User findUserById(Long idUser) {
         return this.userRepository.findOne(idUser);
@@ -133,7 +140,6 @@ public class UserService implements UserDetailsService {
         this.userRepository.save(userForm);
     }
 
-    
     @org.springframework.transaction.annotation.Transactional
     public void lockUser(Long idUser) {
         this.userRepository.setLockFor(idUser);
@@ -150,7 +156,6 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    
     @Transactional
     public void deleteUser(Long idUser) {
         User user = this.userRepository.findOne(idUser);

@@ -31,17 +31,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/ajax/auth/nbr_steps**").permitAll()
+                
                 .antMatchers("/register**").permitAll()
                 .antMatchers("/login**").permitAll()
                 .antMatchers("/users/**").authenticated()
                 .antMatchers("/roles/**").authenticated()
-                .antMatchers("/**").authenticated()
+                //.antMatchers("/**").authenticated()
                 // STATICS STUFFS
                 .and().formLogin().loginPage("/login")
                 .failureUrl("/login?error").permitAll()
                 .successHandler(this.customAuthenticationSuccessHandler)
-                .failureHandler(this.customAuthenticationFailureHandler)
+                //.failureHandler(this.customAuthenticationFailureHandler)
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout").permitAll()
                 .and().sessionManagement().maximumSessions(1).expiredUrl("/expired")
                 .and()
