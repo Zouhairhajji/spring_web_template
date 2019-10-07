@@ -5,20 +5,13 @@
  */
 package fr.template.repositories;
 
-import fr.template.entities.RoleEntity;
-import java.util.List;
-import java.util.Optional;
+import fr.template.entities.LoginHistoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author zouhairhajji
  */
-public interface RoleRepository extends JpaRepository<RoleEntity, Long> {
-    
-    
-    public Optional<RoleEntity> findRoleByLabel(String label);
-    
-    public List<RoleEntity> findByDefaultRoleTrue();
+public interface LoginHistoryRepository  extends JpaRepository<LoginHistoryEntity, Long>{
     
 }

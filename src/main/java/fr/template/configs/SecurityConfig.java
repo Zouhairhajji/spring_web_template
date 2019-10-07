@@ -1,6 +1,7 @@
 package fr.template.configs;
 
-import fr.template.services.UserService;
+import fr.template.handlers.CustomAuthSuccess;
+import fr.template.services.AuthentificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,47 +17,65 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
-    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
-
-    @Autowired
-    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
-
+    private AuthentificationService authService;
     
+    @Autowired
+    private CustomAuthSuccess  customAuthSuccess;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                
                 .antMatchers("/register**").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/login**").permitAll()
                 .antMatchers("/users/**").authenticated()
                 .antMatchers("/roles/**").authenticated()
-                //.antMatchers("/**").authenticated()
-                // STATICS STUFFS
-                .and().formLogin().loginPage("/login")
-                .failureUrl("/login?error").permitAll()
-                .successHandler(this.customAuthenticationSuccessHandler)
-                //.failureHandler(this.customAuthenticationFailureHandler)
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout").permitAll()
-                .and().sessionManagement().maximumSessions(1).expiredUrl("/expired")
-                .and()
-                .and().exceptionHandling().accessDeniedPage("/403");
+                .antMatchers("/**").authenticated();;
+        // STATICS STUFFS
+
+        // login pages configs 
+        http.formLogin()
+                .loginPage("/login")
+                .failureUrl("/login?error=true")
+                .defaultSuccessUrl("/", Boolean.FALSE)
+                .successHandler(this.customAuthSuccess)
+                ;
+
+        // logout config
+        http.logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+                ;
+        
+        // access denied config
+        http.exceptionHandling().accessDeniedPage("/403");
+        
+        
+        // ignore x-frame
+        http.headers().frameOptions().disable();
+        
+        http.csrf().ignoringAntMatchers("/h2-console/**");
+
+        
+        //http.addheaders().successHandler(this.customAuthSuccess);
+        //http.failureHandler(this.customAuthenticationFailureHandler);
+
+        http.sessionManagement().maximumSessions(1).expiredUrl("/expired");
+
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web
-                .ignoring()
-                .antMatchers("/resources/**"); // #3
+        web.ignoring().antMatchers("/resources/**", "/vendors/**"); // ignore auth for resources
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(this.userService).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(this.authService).passwordEncoder(new BCryptPasswordEncoder());
     }
 }

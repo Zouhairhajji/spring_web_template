@@ -1,9 +1,11 @@
 
-<%-- 
-    Document   : login
-    Created on : 27 avr. 2017, 15:30:10
-    Author     : FQLH0717
---%>
+
+
+
+
+
+
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -11,104 +13,214 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
     <head>
+
+
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Page d'authentification</title>
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Gentelella Alela! | </title>
 
-        <link rel="shortcut icon" href="/app_logo.png" type="image/x-icon" />
-        <!-- Bootstrap 3.3.7 -->
-        <link rel="stylesheet" href="<c:url value="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css" />">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="<c:url value="/resources/bower_components/font-awesome/css/font-awesome.min.css" />">
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="<c:url value="/resources/bower_components/Ionicons/css/ionicons.min.css" />">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="<c:url value="/resources/dist/css/AdminLTE.min.css" />">
-        <!-- iCheck -->
-        <link rel="stylesheet" href="<c:url value="/resources/plugins/iCheck/square/blue.css" />">
+        <link href="/resources/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        <link href="/resources/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
-        <!-- Google Font -->
-        <!--link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"-->
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/jdenticon@2.2.0" async></script>
+
+
+        <link href="/resources/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+        <link href="/resources/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+        <link href="/resources/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+        <link href="/resources/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+        <link href="/resources/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+        <link href="/resources/vendors/nprogress/nprogress.css" rel="stylesheet">
+
+
+        <link href="/resources/build/css/custom.min.css" rel="stylesheet">
+
+
+        <style>
+            .x_panel {
+                width: 80%;
+                padding: 10px 17px;
+
+                height: 90%;  
+
+                display: inline-block;
+                margin-left: 10%;
+
+                background: #fff;
+                border: 1px solid #E6E9ED;
+                -webkit-column-break-inside: avoid;
+                -moz-column-break-inside: avoid;
+                column-break-inside: avoid;
+                opacity: 1;
+                transition: all .2s ease;
+            }
+
+
+        </style>
     </head>
-    <body class="hold-transition login-page">
-        <div class="login-box">
-            <div class="login-logo">
-                <a href="<c:url value="/" />">
-                    
-                    <img src="<c:url value="/resources/images/hhd_noir.png" />" alt="Logo"/>
-                    <spring:message code="register.name" /> <br />
-                </a>
-            </div>
-            <!-- /.login-logo -->
-            <div class="login-box-body">
-                <p class="login-box-msg"><spring:message code="login.rappel" /></p>
+    <body >
+        <div class="container body">
+            <div class="main_container">
+                <div class="right_col" role="main">
 
-                <form name='loginForm' action="<c:url value='login' />" method='POST'>
 
-                    <c:if test="${not empty error}">
-                        <div class="alert alert-danger alert-dismissible">${error}</div>
-                    </c:if>
-                    <c:if test="${not empty msg}">
-                        <div class="alert alert-warning  alert-dismissible">${msg}</div>
-                    </c:if>
+                    <div class="x_content">
 
-                    <div class="form-group has-feedback">
-                        <input type="text" class="form-control" placeholder="Identifiant" value="" name='username' />
-                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="password" class="form-control" placeholder="Mot de passe" name='password' AUTOCOMPLETE='OFF' />
-                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                    </div>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat"><spring:message code="login.log" /></button>
+                        <br />
+                        <br />
+                        <div class="x_panel center" style="" >
+                            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+
+
+
+                                <div   class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade active in" id="tab_login_form" aria-labelledby="home-tab">
+
+                                        <form class="form-horizontal form-label-left" novalidate action="/login" method='POST'>
+                                            <span class="section">Login form</span>
+
+                                            <br />
+
+                                            <c:if test="${not empty error}">
+                                                <div class="alert alert-danger alert-dismissible">${error}</div>
+                                            </c:if>
+                                            <c:if test="${not empty msg}">
+                                                <div class="alert alert-warning  alert-dismissible">${msg}</div>
+                                            </c:if>
+
+                                            <div class="item form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Username<span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="email" autocomplete="off" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name='username' placeholder="Username" required="required" >
+                                                </div>
+                                            </div>
+
+                                            <div class="item form-group">
+                                                <label for="password" class="control-label col-md-3">Password</label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="password" name="password" data-validate-length="3,20" class="form-control col-md-7 col-xs-12" name='password'  placeholder="Password" required="required">
+                                                </div>
+                                            </div>
+
+                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+
+                                            <br />
+                                            <br />
+                                            <br />
+
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <button type="submit" class="btn btn-default btn-block btn-flat"> Login </button>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <a href="#tab_register_form" class="btn btn-block btn-primary" role="tab"  data-toggle="tab" aria-expanded="false">New to the site, create an account !</a>
+                                                </div>
+                                            </div>
+
+
+
+                                        </form>
+
+
+                                    </div>
+
+
+
+
+
+
+
+
+                                    <div role="tabpanel" class="tab-pane fade" id="tab_register_form" aria-labelledby="profile-tab">
+
+                                        <span class="section">Register form</span>
+
+                                        <br />
+
+                                        <form class="form-horizontal form-label-left" novalidate action="/register" method='POST'>
+
+
+                                            <div class="item form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span> </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+
+                                            <div class="item form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Number phone <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="number" id="number" name="number" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
+                                                </div>
+                                            </div>
+
+                                            <div class="item form-group">
+                                                <label for="password" class="control-label col-md-3">Password <span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input id="password" type="password" name="password" data-validate-length="6,8" class="form-control col-md-7 col-xs-12" required="required">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="item form-group">
+                                                <label for="password2" class="control-label col-md-3 col-sm-3 col-xs-12">Repeat Password <span class="required">*</span></label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input id="password2" type="password" name="password2" data-validate-linked="password" class="form-control col-md-7 col-xs-12" required="required">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <button type="submit" class="btn btn-default btn-block btn-flat"> register </button>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <a href="#tab_login_form" class="btn btn-block btn-primary" role="tab"  data-toggle="tab" aria-expanded="false">Go back to the previous page</a>
+                                                </div>
+                                            </div>
+
+                                        </form>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
                         </div>
+
                     </div>
-                    <br />
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <a href="<c:url value='/register' />" class="btn btn-primary btn-block btn-flat"><spring:message code="login.create" /></a>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <a href="mailto:developpeurs.equipehhd@orange.com?body=Message&subject=[Portail]: --> Objet <--" class="btn btn-primary btn-block btn-flat"><spring:message code="login.contact" /></a>
-                        </div>
-                    </div>
-                </form>
-                <br/>
-                <div class="row" align="center">
-                    <div class="col-xs-12">
-                        <a href="<c:url value='login?lang=fr' />">(Français)</a>
-                        &nbsp;&nbsp;
-                        <a href="<c:url value='login?lang=en' />">(English)</a>
-                    </div>
+
                 </div>
             </div>
-            <!-- /.login-box-body -->
-        </div> 
-        <!-- /.login-box -->
+        </div>
 
-        <!-- jQuery 2.2.3 -->
-        <script src="<c:url value='/resources/bower_components/jquery/dist/jquery.min.js' />"></script>
-        <!-- Bootstrap 3.3.6 -->
-        <script src="<c:url value='/resources/bower_components/bootstrap/dist/js/bootstrap.min.js' />"></script>
-        <!-- iCheck -->
-        <script src="<c:url value='/resources/plugins/iCheck/icheck.min.js' />"></script>
+        <script src="/resources/vendors/jquery/dist/jquery.min.js" ></script>
 
+        <script src="/resources/vendors/bootstrap/dist/js/bootstrap.min.js" ></script>
+
+        <script src="/resources/vendors/fastclick/lib/fastclick.js" ></script>
+
+        <script src="/resources/vendors/nprogress/nprogress.js" ></script>
+
+        <script src="/resources/vendors/validator/validator.js"  ></script>
+
+        <script src="/resources/build/js/custom.min.js" ></script>
     </body>
 </html>

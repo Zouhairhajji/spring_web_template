@@ -5,31 +5,24 @@
  */
 package fr.template.repositories;
 
-
-import fr.template.models.User;
-import java.util.List;
+import fr.template.entities.UserEntity;
 import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 
 /**
  *
- * @author fqlh0717
+ * @author zouhairhajji
  */
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
+    
+    
+    public Optional<UserEntity> findUserByEmail(String email);
 
-    @Override
-    public List<User> findAll();
-
-    public Optional<User> findUserByUsername(String username);
-
+    
     @Modifying
-    @Query("UPDATE User SET enabled = false where idUser = ?1")
-    public int setLockFor(Long idUser);
-
-    @Modifying
-    @Query("UPDATE User SET enabled = true where idUser = ?1")
-    public int setUnlockFor(Long idUser);
-
+    @Query("UPDATE UserEntity SET enabled = ?2 where username = ?1")
+    public void updateLockByUsername(String username, Boolean lock);
+    
 }

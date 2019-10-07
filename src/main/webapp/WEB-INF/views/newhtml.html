@@ -1,0 +1,11 @@
+$.ajax({
+       url : '/users/register_uffser',  
+      type : 'POST' ,
+      data : {},
+      success : function(code_html, statut){ 
+           alert( statut + '-----' )
+      },
+      error : function(resultat, statut, erreur){
+           alert(  JSON.stringify( resultat ) )
+      }
+});
